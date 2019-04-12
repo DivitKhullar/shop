@@ -15,22 +15,8 @@ server.use('/',express.static(__dirname+'/public'))
 
 //Products
 server.get('/product',async (req,res)=>{
-    res.send(await products.findAll({
-        include: [vendors]
-    }))
-})
-
-server.delete('/product/:id',async (req,res)=>{
-    try {
-        console.log(req.params.id)
-        const delProd = await products.destroy({
-            where: {id:parseInt(req.params.id)}            
-        })   
-        res.send({success:true})     
-    }
-catch (e) {
-    res.send({success: false, err: e.message})
-}
+    const result= await products.findAll({include:[vendors]})
+    res.send(result)
 })
 
 server.post('/product',async (req,res)=>{
@@ -54,6 +40,20 @@ catch (e) {
 }
 })
 
+server.post('/product/delete',async (req,res)=>{
+    try{
+        const result=await products.destroy({
+            where:{
+                id: req.body.id
+            },
+            
+        })
+        res.send({success: true})
+    }catch(error){
+        res.send({success:false,message: error})
+    }
+})
+
 //Vendors
 server.get('/vendor',async (req,res)=>{
     res.send(await vendors.findAll())
@@ -71,54 +71,105 @@ catch (e) {
 }
 })
 
-server.delete('/vendor/:id',async (req,res)=>{
-    try {
-        const delVendor = await vendors.destroy({
-            where: {id:parseInt(req.params.id)}  
-        })   
-        res.send({success:true})     
+server.post('/vendors/delete',async (req,res)=>{
+    try{
+        const result=await vendors.destroy({
+            where:{
+                id: req.body.id
+            },
+        })
+        const result1=await products.destroy({
+            where:{
+                vendorId: null
+            }
+        })
+        res.send({success: true})
+    }catch(error){
+        res.send({success:false,message: error})
     }
-catch (e) {
-    res.send({success: false, err: e.message})
-}
 })
 
 //Users
-server.get('/user',async (req,res)=>{
-    res.send(await users.findAll())
-})
-
 server.post('/user',async (req,res)=>{
-    try {
-        await users.create({
-        username:req.body.username,
-        email:req.body.email  
-    })
-    res.send({success:true})
-}
-catch (e) {
-    res.send({success: false, err: e.message})
-}
+        users.findOrCreate({
+            where:{
+                username: req.body.username,
+                email: req.body.email
+            }
+        }).then(([user,created])=>{
+            res.send(user)
+        })
 })
 
 //CartItem
-server.get('/cartitem',async (req,res)=>{
-    res.send(await cartitems.findAll({    
-    }))
+server.post('/cart/add',async (req,res)=>{
+    try{
+    cartItems.findOrCreate({
+        where:{
+            userId:req.body.userId,
+            productId:req.body.productId
+        },
+        defaults:{
+            qty: 0
+        }
+    }).then((items)=>{            
+            items[0].increment(
+                {
+                    qty: 1
+                },
+                {
+                    where:{
+                        userId:req.body.userId,
+                       productId:req.body.productId
+                    }
+                })
+        
+        res.send({success: true});
+    })    
+}
+catch(error){
+    res.send({success: false,message: error});
+}
 })
 
-server.post('/cartitem',async (req,res)=>{
-    try {
-        await cartitems.create({                
-        quantity:parseInt(req.body.quantity)
-    })
-    res.send({success:true})
-}
-catch (e) {
-    res.send({success: false, err: e.message})
-}
+server.post('/cart',(req,res)=>{
+    try{
+        cartItems.findAll({
+            where:{
+                userId: req.body.userId
+            },
+            include:
+                [
+                    {
+                        model: products,
+                        include:[vendors]
+                    }
+                ]
+            }).then((item)=>{
+            res.send(item);
+        })    
+            
+    }
+    catch(error){
+        res.send({success: false,message: error});
+    }
 })
 
+server.post('/cart/delete',async(req,res)=>{
+    try{
+        const result=await cartItems.destroy({
+            where:{
+                id: req.body.id
+            },
+            
+        })
+        res.send({success: true})
+    }catch(error){
+        res.send({success:false,message: error})
+    }
+})
+
+//Setting Port
 const PORT = process.env.PORT || 2121
 
 db.sync()

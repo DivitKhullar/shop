@@ -1,5 +1,33 @@
-$(() => {
+function deleteproduct(id)
+  {
+    console.log("CHal raha hey bc")
+    $.post(
+      'product/delete',
+      {
+          id: id
+      },
+      (data) => {
+          if (data.success) {
+              $.get('/product',(data)=>{
+                  $('#productlist').empty();
+                  for(let prod of data)
+                  {
+                      $('#productlist').append( 
+              `<tr>
+              <td>${prod.name}</td> <td>${prod.quantity}</td> <td>${prod.price}</td> <td>${prod.vendor.name}</td><td><input type='submit' value='Delete!' onclick='deleteElement(${prod.id})'></td>
+              </tr>`
+              )
+                  }
+              })
+          } else {
+            alert('Some error occurred')
+          }
+        }
+      )
+  } 
 
+$(() => {
+   
   function refreshList() {
     $.get('/product', (data) => {
       $('#productlist').empty()
@@ -11,8 +39,8 @@ $(() => {
           <td>${pro.name}</td>
             <td>${pro.quantity}</td>
             <td>${pro.price}</td>
-            <td>${pro.vendorId}</td>
-            <td><button id = "ProductDelete" type="button">Delete!</button></td>
+            <td>${pro.vendor.name}</td>
+            <td> <input type='submit' value='Delete!' onclick="deleteproduct(${pro.id})"></button> </td>
             </tr>`
           )
       }

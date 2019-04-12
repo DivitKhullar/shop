@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body 
+{background: url(home.jpg);
+  background-size: cover;
+  margin: 0;}
+
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color:grey;}
+
+ul.topnav li a.active {background-color:purple;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 800px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+}
+</style>
+</head>
+<body>
+<ul class="topnav">
+  <li><a class="active" href="Product.html">Product</a></li>
+  <li><a href="Vendor.html">Vendor</a></li>
+  <li><a href="User.html">User</a></li>
+  <li><a href="Cart.html">Cart</a></li>   
+  <li class="right">
+    <img src="art.gif" alt="Trulli" width="45" height="40">
+  </li>
+  </li>
+</ul>
+</body>
+</html>

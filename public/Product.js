@@ -1,6 +1,5 @@
 function deleteproduct(id)
   {
-    console.log("CHal raha hey bc")
     $.post(
       'product/delete',
       {

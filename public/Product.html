@@ -7,8 +7,53 @@
     <title>Product Page</title>
     <script src="jQuery.js"></script>
     <script src="Product.js"></script>
+    <style>
+        body 
+        {background: url(background.jpg);
+          background-size: cover;
+          margin: 0;}
+        
+        ul.topnav {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: #333;
+        }
+        
+        ul.topnav li {float: left;}
+        
+        ul.topnav li a {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+        }
+        
+        ul.topnav li a:hover:not(.active) {background-color:grey;}
+        
+        ul.topnav li a.active {background-color:purple;}
+        
+        ul.topnav li.right {float: right;}
+        
+        @media screen and (max-width: 800px) {
+          ul.topnav li.right, 
+          ul.topnav li {float: none;}
+        }
+        </style>
 </head>
 <body>
+        <ul class="topnav">
+                <li><a class="active" href="Product.html">Product</a></li>
+                <li><a href="Vendor.html">Vendor</a></li>  
+                <li><a href="User.html">Login</a></li>
+                <li><a href="Cart.html">Cart</a></li>           
+                <li class="right">
+                  <img src="art.gif"  alt="Trulli" width="45" height="40"> </a></li>   
+                    <li class="right"><a href="Signup.html">Sign-Up</a></li>      
+                </li>
+              </ul>
     Name of Product:     <input id = "productinput">
     <br>
     Quantity of Product: <input id = "quantityinput">

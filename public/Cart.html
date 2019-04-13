@@ -4,14 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cart</title>
-    <script src="jQuery.js"></script>
+    <title>Document</title>
+    <script src="jquery.js"></script>
     <script src="Cart.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+        body 
+        {background: url(background.jpg);
+          background-size: cover;
+          margin: 0;}
+        
+        ul.topnav {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: #333;
+        }
+        
+        ul.topnav li {float: left;}
+        
+        ul.topnav li a {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+        }
+        
+        ul.topnav li a:hover:not(.active) {background-color:grey;}
+        
+        ul.topnav li a.active {background-color:purple;}
+        
+        ul.topnav li.right {float: right;}
+        
+        @media screen and (max-width: 800px) {
+          ul.topnav li.right, 
+          ul.topnav li {float: none;}
+        }
+        </style>
 </head>
 <body>
-    Quantity: <input id = "cartquantity">
-    <br>           
-    <button id = "cartinputbutton"> Insert Product </button>
-    <ul id = "cartlist"></ul>                
+        <ul class="topnav">
+                <li><a class="active" href="Product.html">Product</a></li>
+                <li><a href="Vendor.html">Vendor</a></li>  
+                <li><a href="User.html">Login</a></li>
+                <li><a href="Cart.html">Cart</a></li>           
+                <li class="right">
+                  <img src="art.gif"  alt="Trulli" width="45" height="40"> </a></li>   
+                    <li class="right"><a href="Signup.html">Sign-Up</a></li>      
+                </li>
+              </ul>
+    <div class="container">
+            <label>Name</label>
+            <input type="text" placeholder="enter your name" id="name" required>
+            <br>
+            <label>Email</label>
+            <input type="email" placeholder="enter your email" id="email" required>
+            <button id="login">Login</button>
+    <h3>Products in Cart:</h3>
+    <br>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <td>NAME</td>
+                <td>PRICE</td>
+                <td>Quantity</td>
+                <td>Vendor Name</td>
+                <td>OPTION</td>
+            </tr>
+        </thead>
+        <tbody id="Products">
+
+        </tbody>
+    </table> 
+</div>
 </body>
 </html>

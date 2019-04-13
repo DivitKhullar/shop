@@ -104,23 +104,23 @@ server.post('/user',async (req,res)=>{
 //CartItem
 server.post('/cart/add',async (req,res)=>{
     try{
-    cartItems.findOrCreate({
+    cartitems.findOrCreate({
         where:{
             userId:req.body.userId,
             productId:req.body.productId
         },
         defaults:{
-            qty: 0
+            quantity: 0
         }
     }).then((items)=>{            
             items[0].increment(
                 {
-                    qty: 1
+                    quantity: 1
                 },
                 {
                     where:{
                         userId:req.body.userId,
-                       productId:req.body.productId
+                        productId:req.body.productId
                     }
                 })
         
@@ -134,7 +134,7 @@ catch(error){
 
 server.post('/cart',(req,res)=>{
     try{
-        cartItems.findAll({
+        cartitems.findAll({
             where:{
                 userId: req.body.userId
             },
@@ -157,14 +157,14 @@ server.post('/cart',(req,res)=>{
 
 server.post('/cart/delete',async(req,res)=>{
     try{
-        const result=await cartItems.destroy({
+        const result=await cartitems.destroy({
             where:{
                 id: req.body.id
-            },
-            
+            },                  
         })
-        res.send({success: true})
-    }catch(error){
+        res.send({success: true}) 
+    }
+    catch(error){
         res.send({success:false,message: error})
     }
 })

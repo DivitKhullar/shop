@@ -8,7 +8,7 @@ $(()=>{
       },
       (data)=>
       {
-          setItem("userid",data.id);
+          sessionStorage.setItem("userid",data.id);
           alert(`Welcome user: ${data.username}`);
           refreshList()
       })
@@ -34,7 +34,7 @@ function refreshList()
       $.post(
           'cart/add',
           {
-              userId:getItem("userid"),
+              userId:sessionStorage.getItem("userid"),
               productId: productId
           },
           (data) => {

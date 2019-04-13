@@ -1,3 +1,31 @@
+function deleteVendor(id)
+  {
+    $.post(
+      'vendor/delete',
+      {
+          id: id
+      },
+      (data) => {
+          if (data.success) {
+              $.get('/vendor',(data)=>{
+                  $('#vendorlist').empty();
+                  for(let vendor of data)
+                  {
+                      $('#vendorlist').append( 
+                        `<tr>
+                        <td>${vendor.name}</td> 
+                        <td><input type='submit' value='Delete!' onclick='deleteVendor(${vendor.id})'></td>
+                        </tr>`  
+              )
+                  }
+              })
+          } else {
+            alert('Some error occurred')
+          }
+        }
+      )
+  } 
+
 $(() => {
 
     function refreshList() {
@@ -6,7 +34,10 @@ $(() => {
               
         for (let ven of data) {
           $('#vendorlist').append(
-            `<li> ${ven.name} </li>`
+                 `<tr>
+                  <td>${ven.name}</td> 
+                  <td><input type='submit' value='Delete!' onclick='deleteVendor(${ven.id})'></td>
+                  </tr>`            
           )
         }
       })

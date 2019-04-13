@@ -8,7 +8,7 @@ $(()=>{
       },
       (data)=>
       {
-          localStorage.setItem("userid",data.id);
+          sessionStorage.setItem("userid",data.id);
           alert(`Welcome user: ${data.username}`);
           refreshList()
       })
@@ -18,7 +18,7 @@ function refreshList(){
   $.post(
       '/cart',
       {
-          userId: localStorage.getItem("userid")
+          userId: sessionStorage.getItem("userid")
       },
       (data)=>{
           var sum=0;

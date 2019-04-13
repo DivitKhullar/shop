@@ -71,7 +71,7 @@ catch (e) {
 }
 })
 
-server.post('/vendors/delete',async (req,res)=>{
+server.post('/vendor/delete',async (req,res)=>{
     try{
         const result=await vendors.destroy({
             where:{

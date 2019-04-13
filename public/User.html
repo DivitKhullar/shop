@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Login</title>
     <script src="jQuery.js"></script>
     <script src="User.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -48,9 +48,9 @@
 </head>
 <body>
         <ul class="topnav">
-                <li><a class="active" href="Product.html">Product</a></li>
+                <li><a href="Product.html">Product</a></li>
                 <li><a href="Vendor.html">Vendor</a></li>  
-                <li><a href="User.html">Login</a></li>
+                <li><a class="active" href="User.html">Login</a></li>
                 <li><a href="Cart.html">Cart</a></li>           
                 <li class="right">
                   <img src="art.gif"  alt="Trulli" width="45" height="40"> </a></li>   
@@ -64,15 +64,15 @@
     <label>Email</label>
     <input type="email" placeholder="enter your email" id="email" required>
     <button id="login">Login</button>
-    <button id="cart" onclick="location.href = '/cart.html';">MyCart</button>
+    <button id="cart" onclick="location.href = '/Cart.html';">MyCart</button>
         <table class="table table-hover table-hovered">
                 <thead>
                     <tr>
-                        <td>NAME</td>
-                        <td>PRICE</td>
-                        <td>Quantity</td>
-                        <td>Vendor Name</td>
-                        <td>OPTION</td>
+                        <td><b>NAME</b></td>
+                        <td><b>PRICE</b></td>
+                        <td><b>QUANTITY</b></td>
+                        <td><b>VENDOR NAME</b></td>
+                        <td><b>OPTION</b></td>
                     </tr>
                 </thead>
                 <tbody id="Products">
